@@ -68,21 +68,21 @@
                         li.x = li.x + li.toX * (time * 0.05);
                         li.y = li.y + li.toY * (time * 0.05);
 
-                        // if(li.x > _snowflake_width) { 
-                        //     li.x = 0 
-                        // };
-                        // if(li.y > _snowflake_height) { 
-                        //     li.y = 0 
-                        // };
-                        // if(li.x < 0 ) {
-                        //     li.x = _snowflake_width
-                        // }
-                        // if(li.y < 0) {
-                        //     li.y = _snowflake_height
-                        // }
-                        // if(time < speed ){
-                        //     time++
-                        // }
+                        if(li.x > _snowflake_width) { 
+                            li.x = 0 
+                        };
+                        if(li.y > _snowflake_height) { 
+                            li.y = 0 
+                        };
+                        if(li.x < 0 ) {
+                            li.x = _snowflake_width
+                        }
+                        if(li.y < 0) {
+                            li.y = _snowflake_height
+                        }
+                        if(time < speed ){
+                            time++
+                        }
                          timerID = setTimeout(create_snow_and_move, 50);
                     }
                 }
