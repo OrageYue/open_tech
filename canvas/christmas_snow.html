@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv='X-UA-Compatible' content="IE=edge">
+        <title>Marry Christmas</title>
+        
+        <style>
+            .snow{
+                background-image: url(../assets/tree.jpg);
+                background-repeat: no-repeat;
+                background-size: 100%;
+                height: 1000px;
+                width: 800px;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas class="snow" id='snow_container' ></canvas>
+        <script>
+            function snow_now() {
+                let snow_canvas = document.getElementById('snow_container');
+                snow_canvas.setAttribute('height', window.innerHeight);
+
+                // define basic parmas
+                let ctx = snow_canvas.getContext('2d');
+                let _snowflake_nums = 400; 
+                let _snowflake_lists = [];
+
+                let _snowflake_width = snow_canvas.clientWidth;
+                let _snowflake_height = snow_canvas.clientHeight;
+                let _snowflake_colors = ['#eee'];
+                let _snowflake_size = 2;
+
+                let time = 0;
+                let count = 0;
+                let speed = 10;
+                
+                function init_snow() {
+
+                    //create snowflake and add it in snowflakeLists 
+                    for(let i = 0; i < _snowflake_nums; i++){
+                        _snowflake_lists[i] = {
+                            x: Math.ceil(Math.random() * _snowflake_width),
+                            y: Math.ceil(Math.random() * _snowflake_height),
+                            toX: Math.random() * 3 + 1,
+                            toY: Math.random() * 3 + 1,
+                            color: _snowflake_colors[Math.floor(Math.random() * _snowflake_colors.length)],
+                            size: Math.random() * _snowflake_size
+                        }
+                    }
+                
+                }
+
+                function create_snow_and_move() {
+
+                    ctx.clearRect(0, 0, _snowflake_width, _snowflake_height);
+
+                    for(let i=0; i < _snowflake_lists.length; i++){
+
+                        var li = _snowflake_lists[i];
+                        // draw every snowflake
+                        ctx.beginPath();
+                        ctx.arc(li.x, li.y, li.size, 0, Math.PI*2, false);
+                        ctx.fillStyle = li.color;
+                        ctx.fill();
+                        // change snowflake position
+                        li.x = li.x + li.toX * (time * 0.05);
+                        li.y = li.y + li.toY * (time * 0.05);
+
+                        // if(li.x > _snowflake_width) { 
+                        //     li.x = 0 
+                        // };
+                        // if(li.y > _snowflake_height) { 
+                        //     li.y = 0 
+                        // };
+                        // if(li.x < 0 ) {
+                        //     li.x = _snowflake_width
+                        // }
+                        // if(li.y < 0) {
+                        //     li.y = _snowflake_height
+                        // }
+                        // if(time < speed ){
+                        //     time++
+                        // }
+                         timerID = setTimeout(create_snow_and_move, 50);
+                    }
+                }
+                
+                init_snow();
+                create_snow_and_move();
+            }
+            window.onload = function() {
+                snow_now()
+            }
+        </script>
+    </body>
+</html>
